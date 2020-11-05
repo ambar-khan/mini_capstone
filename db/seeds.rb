@@ -5,3 +5,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+product = Product.new(name: "Apple Macbook Pro", price: 1299, image_url: "https://images-na.ssl-images-amazon.com/images/I/71BMVOs2xML._AC_SL1500_.jpg", description: "2020 Space Gray 13.3 inch Apple with Retina Display")
+product.save
+
+p product
