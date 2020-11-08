@@ -1,11 +1,11 @@
 class Api::ProductsController < ApplicationController
-  def first_product
-    @first_product = Product.first
-    render "first_product.json.jb"
+  def index
+    @products = Product.all
+    render 'index.json.jb'
   end
 
-  def all 
-    @all = Product.all
-    render "all.json.jb"
-  end
+  def show
+    @product = Product.first
+    render 'show.json.jb'
+  end 
 end
