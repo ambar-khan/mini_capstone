@@ -11,6 +11,7 @@ class Api::ProductsController < ApplicationController
   end 
 
   def create
+    #make new recipe
     @product = Product.new(
       name: params[:input_name], 
       price: params[:input_price], 
@@ -18,6 +19,20 @@ class Api::ProductsController < ApplicationController
       description: params[:input_description]
     )
     @product.save
+    render 'show.json.jb'
+  end
+
+  def update
+    #find product
+    @product = Product.find_by(id: params[:id])
+    #modify it
+    @product.name = params[:name]
+    @product.price = params[:price]
+    @product.image_url = params[:image_url]
+    @product.description = params[:description]
+    #save it
+    @product.save
+
     render 'show.json.jb'
   end
 end
