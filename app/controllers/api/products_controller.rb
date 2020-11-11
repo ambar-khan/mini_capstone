@@ -5,8 +5,7 @@ class Api::ProductsController < ApplicationController
   end
 
   def show
-    the_id = params[:id]
-    @product = Product.find_by(id: the_id)
+    @product = Product.find_by(id: params[:id])
     render 'show.json.jb'
   end 
 
@@ -26,7 +25,7 @@ class Api::ProductsController < ApplicationController
     #find product
     @product = Product.find_by(id: params[:id])
     #modify it
-    @product.name = params[:name]
+    @product.name = params[:name] 
     @product.price = params[:price]
     @product.image_url = params[:image_url]
     @product.description = params[:description]
@@ -42,5 +41,6 @@ class Api::ProductsController < ApplicationController
     @product.destroy
     render json: {message: "Product removed"}
   end
+
 
 end
