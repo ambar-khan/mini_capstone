@@ -5,4 +5,12 @@ class Product < ApplicationRecord
     "Price for computer: $#{price}, tax at 9%: $#{tax}. Total cost for computer including tax is $#{total}"
   end
 
+  def is_discounted
+   if price < 10
+      "True"
+   else
+     "False"
+   end
+  end
+
 end
