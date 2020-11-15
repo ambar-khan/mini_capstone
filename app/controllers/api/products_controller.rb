@@ -9,11 +9,11 @@ class Api::ProductsController < ApplicationController
       @products = Product.all
     end
 
-    # if sort = "price"
-    #   @products = @products.order(price: :asc)
-    # else
-    #  @products = @products.order(id: :asc)
-    # end
+    if sort = "price"
+      @products = @products.order(price: :asc)
+    else
+     @products = @products.order(id: :asc)
+    end
 
     @products = @products.order(id: :asc)
     render 'index.json.jb'
