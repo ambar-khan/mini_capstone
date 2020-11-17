@@ -1,6 +1,7 @@
 class Api::ProductsController < ApplicationController
   def index
     # @products = Product.all
+    sort_order = params[:sort_order]
     sort = params[:sort]
     search_term = params[:search]
     if search_term
@@ -9,7 +10,9 @@ class Api::ProductsController < ApplicationController
       @products = Product.all
     end
 
-    if sort = "price"
+    if sort == "price" && sort_order == "desc"
+      @products = @products.order(price: :desc)
+    elsif sort == "price"
       @products = @products.order(price: :asc)
     else
      @products = @products.order(id: :asc)
