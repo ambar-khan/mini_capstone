@@ -6,5 +6,5 @@
     total: number_to_currency(product.total),
     image_url: product.image_url,
     description: product.description,
-    supplier: product.supplier.name
+    supplier: product.supplier
 }
