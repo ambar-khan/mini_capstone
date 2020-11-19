@@ -1,7 +1,9 @@
 class Api::ProductsController < ApplicationController
   def index
-    # @products = Product.all
-  
+    p "current_user"
+    p current_user
+    p "/current_user"
+
     if params[:search]
       @products = Product.where("name ILIKE '%#{search_term}%'")
     else
@@ -17,8 +19,13 @@ class Api::ProductsController < ApplicationController
     end
 
     @products = @products.order(id: :asc)
-    render 'index.json.jb'
+    if current_user
+      render 'index.json.jb'
+    else
+      render json: []
+    end
   end
+
 #figure out discount
   # if params[:discount] == "true"
   #   @products = @products.where("price < 1000")
@@ -27,6 +34,7 @@ class Api::ProductsController < ApplicationController
   def show
     @product = Product.find_by(id: params[:id])
     render 'show.json.jb'
+    p current_user
   end 
 
   def create
@@ -43,6 +51,7 @@ class Api::ProductsController < ApplicationController
     else
       render json: {errors: @product.errors.full_messages}, status: :unprocessable_entity
     end
+
   end
 
   def update
@@ -65,6 +74,4 @@ class Api::ProductsController < ApplicationController
     @product.destroy
     render json: {message: "Product removed"}
   end
-
-
 end
