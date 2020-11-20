@@ -1,4 +1,6 @@
 class Api::ProductsController < ApplicationController
+  before_action :authenticate_user, only:  [:create, :update]
+  
   def index
     p "current_user"
     p current_user
@@ -17,13 +19,6 @@ class Api::ProductsController < ApplicationController
     else
      @products = @products.order(id: :asc)
     end
-
-    @products = @products.order(id: :asc)
-    if current_user
-      render 'index.json.jb'
-    else
-      render json: []
-    end
   end
 
 #figure out discount
@@ -38,21 +33,16 @@ class Api::ProductsController < ApplicationController
   end 
 
   def create
-    #make new recipe
     @product = Product.new(
-      name: params[:input_name], 
-      price: params[:input_price], 
-      image_url: params[:input_image_url], 
-      description: params[:input_description]
+      name: params[:name],
+      price: params[:price],
+      description: params[:description],
+      supplier_id: params[:supplier_id]
     )
-    
-    if @product.save
-      render "show.json.jb"
-    else
-      render json: {errors: @product.errors.full_messages}, status: :unprocessable_entity
-    end
-
+    @product.save
+    render "show.json.jb"
   end
+
 
   def update
     #find product

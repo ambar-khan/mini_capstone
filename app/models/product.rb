@@ -5,22 +5,14 @@ class Product < ApplicationRecord
   belongs_to :supplier
   has_many :images
   has_many :orders
-
-  # def supplier
-  #   Supplier.find_by(id: supplier_id) 
-  # end
   
-  def product_tax
-    tax = price * 0.09
+  def tax
+    price * 0.09
   end
 
-  def is_discounted
-   if price < 10
-      return true
-   else
-     return false
-   end
-  end
+  # def is_discounted
+  #   price < 1000
+  # end
 
   def total
     tax = price * 0.09
