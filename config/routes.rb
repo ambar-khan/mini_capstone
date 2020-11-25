@@ -18,5 +18,7 @@ Rails.application.routes.draw do
     post "/sessions" => "sessions#create"
 
     post "/orders" => "orders#create"
+
+    post "/carted_products" => "carted_products#create"
   end
 end
