@@ -1,4 +1,5 @@
 class Api::CartedProductsController < ApplicationController
+  before_action :authenticate_user
 
   def create
     # product = Product.find_by(id: params[:product_id])
@@ -8,6 +9,10 @@ class Api::CartedProductsController < ApplicationController
       quantity: params[:quantity],
     ) 
     render "index.json.jb"
+  end
+
+  def index
+    render json: {message: "This works"}
   end
 
 end
